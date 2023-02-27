@@ -1,24 +1,51 @@
-import React, {useRef, useEffect} from 'react';
-import {Animated, Text, View} from 'react-native';
+import * as React from 'react';
+import { Button, View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const FadeInView = props => {
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 10000,
-      useNativeDriver: true,
-    }).start();
-  }, [fadeAnim]);
-
+function HomeScreen({ navigation }) {
   return (
-    <Animated.View // Special animatable View
-      style={{
-        ...props.style,
-        opacity: fadeAnim, // Bind opacity to animated value
-      }}>
-      {props.children}
-    </Animated.View>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to A"
+        onPress={() => navigation.navigate('A')}
+      />
+      <Button
+        title="Go to B"
+        onPress={() => navigation.navigate('B')}
+      />
+    </View>
   );
-};
+}
+
+function Ascreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>This is screen A!</Text>
+    </View>
+  );
+}
+
+function Bscreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>This is screen B</Text>
+    </View>
+  );
+}
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="A" component={Ascreen} />
+        <Stack.Screen name="B" component={Bscreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
