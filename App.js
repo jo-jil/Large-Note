@@ -5,42 +5,93 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.app}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to A"
-        onPress={() => navigation.navigate('A')}
-      />
-      <Button
-        title="Go to B"
-        onPress={() => navigation.navigate('B')}
-      />
-      </View>
+      <Button 
+      title="Go to A"
+      onPress={() => navigation.navigate('A')}>
+      </Button>
+
+      <Button 
+      title="Go to B"
+      onPress={() => navigation.navigate('B')}>
+      </Button>
+    </View>
 
   );
 }
 
-function Ascreen() {
+function Ascreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>This is screen A!</Text>
+    <View style={styles.app}>
+    <Row>
+      <Col numRows={2}>
+        <Text>First column</Text>
+      </Col>
+      <Col numRows={2}>
+        <Text>Second column</Text>
+      </Col>
+    </Row>
+  </View>
+  );
+}
+
+function Bscreen({ navigation }) {
+  return (
+    <View style={styles.app}>
+      <Text>B Screen</Text>
+      <Button 
+      title="Go to E"
+      onPress={() => navigation.navigate('E')}>
+      </Button>
+
+      <Button 
+      title="Go to F"
+      onPress={() => navigation.navigate('F')}>
+      </Button>
     </View>
   );
 }
 
-function Bscreen() {
+function Escreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>This is screen B</Text>
-    </View>
+    <View style={styles.app}>
+      <Text>E Screen</Text>
+    <Row>
+      <Col numRows={2}>
+        <Text>Screen E</Text>
+      </Col>
+      <Col numRows={2}>
+        <Text>Second column</Text>
+      </Col>
+    </Row>
+  </View>
   );
 }
+
+function Fscreen({ navigation }) {
+  return (
+    <View style={styles.app}>
+    <Row>
+      <Col numRows={2}>
+        <Text>Screen F</Text>
+      </Col>
+      <Col numRows={2}>
+        <Text>Second column</Text>
+      </Col>
+    </Row>
+  </View>
+  );
+}
+
+
+
 const Stack = createNativeStackNavigator();
 
 // Styles
 const styles = {
   app: {
-    flex: 4, // the number of columns you want to devide the screen into
+    flex: 2, // the number of columns you want to devide the screen into
     marginHorizontal: "auto",
     width: 400,
     backgroundColor: "red"
@@ -84,37 +135,16 @@ const Row = ({ children }) => (
 
 function App()  {
   return (
-    <View style={styles.app}>
-      <Row>
-        <Col numRows={2}>
-          <Text>First column</Text>
-        </Col>
-        <Col numRows={2}>
-          <Text>Second column</Text>
-        </Col>
-      </Row>
-      <Row>
-        <Col numRows={1}>
-          <Text>First column</Text>
-        </Col>
-        <Col numRows={3}>
-          <Text>Second Column</Text>
-        </Col>
-      </Row>
-    </View>
-  )
-}
-/*
-function App() {
-  return (
-    <NavigationContainer>
+  <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="A" component={Ascreen} />
         <Stack.Screen name="B" component={Bscreen} />
+        <Stack.Screen name="E" component={Escreen} />
+        <Stack.Screen name="F" component={Fscreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}*/
+}
 
 export default App;
